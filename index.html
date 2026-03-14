@@ -46,7 +46,7 @@
             border-color: #10b981;
             transform: translateY(-4px);
         }
-        
+
         .art-container {
             position: relative;
             width: 100%;
@@ -60,7 +60,7 @@
             object-fit: cover;
             display: block;
         }
-        
+
         .art-label {
             position: absolute;
             top: 15px;
@@ -93,7 +93,7 @@
             margin-bottom: 1.5rem;
             color: #f1d592;
         }
-        
+
         .social-btn {
             display: inline-flex;
             align-items: center;
@@ -109,25 +109,151 @@
         .btn-twitter { background-color: #000000; border: 1px solid #333; }
         .social-btn:hover { opacity: 0.8; }
         .x-symbol { font-size: 1.1rem; font-family: serif; }
+
+        /* ── Language Switcher ── */
+        #lang-widget {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        #lang-label {
+            background: #111;
+            border: 1px solid #2a2a2a;
+            border-top: none;
+            border-right: none;
+            border-radius: 0 0 0 8px;
+            padding: 4px 13px;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #555;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            user-select: none;
+        }
+
+        #lang-flags {
+            background: #111;
+            border: 1px solid #222;
+            border-top: none;
+            border-right: none;
+            border-radius: 0 0 0 12px;
+            padding: 10px 14px 12px 14px;
+            display: flex;
+            align-items: center;
+            /* fixed size so the widget doesn't shift */
+            width: 70px;
+            height: 64px;
+            position: relative;
+        }
+
+        /* Stack both flags on top of each other */
+        .flag-btn {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            padding: 0;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        .flag-btn:hover {
+            border-color: #c5a059;
+        }
+        .flag-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+        .flag-btn.visible {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: all;
+        }
+        .flag-btn.hidden-flag {
+            opacity: 0;
+            transform: scale(0.7);
+            pointer-events: none;
+        }
+
+        /* Transition overlay */
+        #lang-transition {
+            position: fixed;
+            inset: 0;
+            background: #0a0a0a;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 8888;
+            transition: opacity 0.22s ease;
+        }
+        #lang-transition.active {
+            opacity: 0.7;
+            pointer-events: all;
+        }
+
+        /* Text transition for translatable elements */
+        [data-en][data-pt] {
+            transition: opacity 0.18s ease;
+        }
+        [data-en][data-pt].lang-fade {
+            opacity: 0;
+        }
     </style>
 </head>
 <body class="min-h-screen py-16 px-6">
 
+    <!-- Language Transition Overlay -->
+    <div id="lang-transition"></div>
+
+    <!-- Language Switcher Widget -->
+    <div id="lang-widget">
+        <div id="lang-label">language</div>
+        <div id="lang-flags">
+            <!-- US flag: visible when in English, click to go PT -->
+            <button class="flag-btn visible" id="flag-us" title="Switch to Português" onclick="switchLang('pt')">
+                <img src="https://flagcdn.com/w80/us.png" alt="Switch to Português">
+            </button>
+            <!-- BR flag: visible when in Portuguese, click to go EN -->
+            <button class="flag-btn hidden-flag" id="flag-br" title="Switch to English" onclick="switchLang('en')">
+                <img src="https://flagcdn.com/w80/br.png" alt="Switch to English">
+            </button>
+        </div>
+    </div>
+
     <header class="container mx-auto max-w-6xl mb-12">
         <div class="flex flex-col items-center justify-center gap-4 mb-6 text-center">
             <div>
-                <h1 class="text-6xl font-bold mb-2 gold-text header-font">Commission Information</h1>
-                <p class="text-zinc-500 italic max-w-xl mx-auto">
+                <h1 class="text-6xl font-bold mb-2 gold-text header-font"
+                    data-en="Commission Information"
+                    data-pt="Informações de Comissão">Commission Information</h1>
+                <p class="text-zinc-500 italic max-w-xl mx-auto"
+                   data-en="I specialize exclusively in male, muscular furry character artwork. I do not accept NSFW commissions under any circumstances."
+                   data-pt="Especializo-me exclusivamente em arte de personagens furry masculinos e musculosos. Não aceito comissões NSFW sob nenhuma circunstância.">
                     I specialize exclusively in male, muscular furry character artwork. I do not accept NSFW commissions under any circumstances.
                 </p>
             </div>
         </div>
-        
+
         <div class="flex flex-col items-center gap-4">
-            <p class="text-zinc-400 text-sm">If you wanna see more of my art, follow me on:</p>
+            <p class="text-zinc-400 text-sm"
+               data-en="If you wanna see more of my art, follow me on:"
+               data-pt="Se quiser ver mais da minha arte, me siga em:">If you wanna see more of my art, follow me on:</p>
             <div class="flex justify-center">
                 <a href="https://x.com/PND0m" target="_blank" class="social-btn btn-twitter">
-                    <span class="x-symbol">𝕏</span> 
+                    <span class="x-symbol">𝕏</span>
                     <span>Twitter</span>
                 </a>
             </div>
@@ -135,26 +261,36 @@
     </header>
 
     <main class="container mx-auto max-w-6xl">
-        
+
         <div class="grid md:grid-cols-3 gap-8 mb-8">
             <div class="glass-card rounded-2xl category-card">
                 <div class="art-container">
-                    <span class="art-label">Sketch Example</span>
+                    <span class="art-label"
+                          data-en="Sketch Example"
+                          data-pt="Exemplo de Sketch">Sketch Example</span>
                     <img src="images/sketch.png" alt="Sketch" class="art-preview">
                 </div>
                 <div class="p-8 text-center md:text-left">
-                    <h3 class="header-font text-2xl mb-8 border-b border-zinc-800 pb-4">Sketch</h3>
+                    <h3 class="header-font text-2xl mb-8 border-b border-zinc-800 pb-4"
+                        data-en="Sketch"
+                        data-pt="Sketch">Sketch</h3>
                     <ul class="space-y-8">
                         <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1">Headshot</span>
+                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
+                                  data-en="Headshot"
+                                  data-pt="Busto">Headshot</span>
                             <div class="text-2xl font-semibold"><span class="price-text font-bold">$6</span><span class="price-divider">/</span><span class="price-brl text-lg">R$30</span></div>
                         </li>
                         <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1">Half Body</span>
+                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
+                                  data-en="Half Body"
+                                  data-pt="Meio Corpo">Half Body</span>
                             <div class="text-2xl font-semibold"><span class="price-text font-bold">$11</span><span class="price-divider">/</span><span class="price-brl text-lg">R$55</span></div>
                         </li>
                         <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1">Full Body</span>
+                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
+                                  data-en="Full Body"
+                                  data-pt="Corpo Inteiro">Full Body</span>
                             <div class="text-2xl font-semibold"><span class="price-text font-bold">$22</span><span class="price-divider">/</span><span class="price-brl text-lg">R$110</span></div>
                         </li>
                     </ul>
@@ -163,22 +299,32 @@
 
             <div class="glass-card rounded-2xl category-card" style="border-top-color: #d4af37;">
                 <div class="art-container">
-                    <span class="art-label">Line & Color Example</span>
-                    <img src="images/color.png" alt="Line & Color" class="art-preview">
+                    <span class="art-label"
+                          data-en="Lineart &amp; Color Example"
+                          data-pt="Lineart &amp; Color Example">Lineart &amp; Color Example</span>
+                    <img src="images/color.png" alt="Lineart & Color" class="art-preview">
                 </div>
                 <div class="p-8 text-center md:text-left">
-                    <h3 class="header-font text-2xl mb-8 border-b border-zinc-800 pb-4 text-zinc-100">Line & Color</h3>
+                    <h3 class="header-font text-2xl mb-8 border-b border-zinc-800 pb-4 text-zinc-100"
+                        data-en="Lineart &amp; Color"
+                        data-pt="Lineart &amp; Color">Lineart &amp; Color</h3>
                     <ul class="space-y-8">
                         <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1">Headshot</span>
+                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
+                                  data-en="Headshot"
+                                  data-pt="Busto">Headshot</span>
                             <div class="text-2xl font-semibold"><span class="price-text font-bold">$11</span><span class="price-divider">/</span><span class="price-brl text-lg">R$55</span></div>
                         </li>
                         <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1">Half Body</span>
+                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
+                                  data-en="Half Body"
+                                  data-pt="Meio Corpo">Half Body</span>
                             <div class="text-2xl font-semibold"><span class="price-text font-bold">$27</span><span class="price-divider">/</span><span class="price-brl text-lg">R$135</span></div>
                         </li>
                         <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1">Full Body</span>
+                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
+                                  data-en="Full Body"
+                                  data-pt="Corpo Inteiro">Full Body</span>
                             <div class="text-2xl font-semibold"><span class="price-text font-bold">$32</span><span class="price-divider">/</span><span class="price-brl text-lg">R$160</span></div>
                         </li>
                     </ul>
@@ -187,22 +333,32 @@
 
             <div class="glass-card rounded-2xl category-card" style="border-top-color: #f1d592;">
                 <div class="art-container">
-                    <span class="art-label">Full Shade Example</span>
+                    <span class="art-label"
+                          data-en="Full Shade Example"
+                          data-pt="Exemplo de Full Shade">Full Shade Example</span>
                     <img src="images/shade.png" alt="Full Shade" class="art-preview">
                 </div>
                 <div class="p-8 text-center md:text-left">
-                    <h3 class="header-font text-2xl mb-8 border-b border-zinc-800 pb-4 text-zinc-100">Full Shade</h3>
+                    <h3 class="header-font text-2xl mb-8 border-b border-zinc-800 pb-4 text-zinc-100"
+                        data-en="Full Shade"
+                        data-pt="Full Shade">Full Shade</h3>
                     <ul class="space-y-8">
                         <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1">Headshot</span>
+                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
+                                  data-en="Headshot"
+                                  data-pt="Busto">Headshot</span>
                             <div class="text-2xl font-semibold"><span class="price-text font-bold">$27</span><span class="price-divider">/</span><span class="price-brl text-lg">R$135</span></div>
                         </li>
                         <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1">Half Body</span>
+                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
+                                  data-en="Half Body"
+                                  data-pt="Meio Corpo">Half Body</span>
                             <div class="text-2xl font-semibold"><span class="price-text font-bold">$32</span><span class="price-divider">/</span><span class="price-brl text-lg">R$160</span></div>
                         </li>
                         <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1">Full Body</span>
+                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
+                                  data-en="Full Body"
+                                  data-pt="Corpo Inteiro">Full Body</span>
                             <div class="text-2xl font-semibold"><span class="price-text font-bold">$54</span><span class="price-divider">/</span><span class="price-brl text-lg">R$270</span></div>
                         </li>
                     </ul>
@@ -212,14 +368,19 @@
 
         <div class="max-w-4xl mx-auto mb-6 px-2 text-center">
             <p class="text-sm text-zinc-400 uppercase tracking-[0.2em] font-semibold">
-                Prices shown as: <span class="price-text">$ USD</span> <span class="price-divider">/</span> <span class="price-brl">R$ BRL</span>
+                <span data-en="Prices shown as:" data-pt="Preços exibidos como:">Prices shown as:</span>
+                <span class="price-text">$ USD</span> <span class="price-divider">/</span> <span class="price-brl">R$ BRL</span>
             </p>
         </div>
 
         <div class="max-w-4xl mx-auto mb-12">
             <div class="glass-card p-6 rounded-xl border-l-2 border-emerald-500">
-                <h4 class="header-font text-lg text-emerald-400 mb-2">Pricing and Currency</h4>
-                <p class="text-sm text-zinc-500 leading-relaxed">
+                <h4 class="header-font text-lg text-emerald-400 mb-2"
+                    data-en="Pricing and Currency"
+                    data-pt="Preços e Moeda">Pricing and Currency</h4>
+                <p class="text-sm text-zinc-500 leading-relaxed"
+                   data-en="All transactions are handled securely via PayPal. Prices listed in Brazilian Real will be adjusted to match the USD value, ensuring equivalent pricing based on the current exchange rate."
+                   data-pt="Todas as transações são feitas com segurança via PayPal. Os preços em Real Brasileiro serão ajustados para corresponder ao valor em USD, garantindo preços equivalentes com base na taxa de câmbio atual.">
                     All transactions are handled securely via PayPal. Prices listed in Brazilian Real will be adjusted to match the USD value, ensuring equivalent pricing based on the current exchange rate.
                 </p>
             </div>
@@ -230,26 +391,44 @@
         <div class="grid md:grid-cols-2 gap-16 mb-16">
             <div class="space-y-12">
                 <section>
-                    <h4 class="header-font section-title">Commission Scope</h4>
+                    <h4 class="header-font section-title"
+                        data-en="Commission Scope"
+                        data-pt="Escopo das Comissões">Commission Scope</h4>
                     <ul class="space-y-4 text-zinc-400">
-                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span> Only male furry characters.</li>
-                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span> Muscular and strong body types only.</li>
-                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span> SFW artwork only.</li>
-                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span> <b>Payments accepted via PayPal only.</b></li>
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span>
+                            <span data-en="Only male furry characters." data-pt="Apenas personagens furry masculinos.">Only male furry characters.</span>
+                        </li>
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span>
+                            <span data-en="Muscular and strong body types only." data-pt="Apenas corpos musculosos e fortes.">Muscular and strong body types only.</span>
+                        </li>
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span>
+                            <span data-en="SFW artwork only." data-pt="Apenas arte SFW.">SFW artwork only.</span>
+                        </li>
+                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span>
+                            <b><span data-en="Payments accepted via PayPal only." data-pt="Pagamentos aceitos apenas via PayPal.">Payments accepted via PayPal only.</span></b>
+                        </li>
                     </ul>
-                    <p class="mt-6 text-sm warning-text italic">Any request outside this scope will be declined.</p>
+                    <p class="mt-6 text-sm warning-text italic"
+                       data-en="Any request outside this scope will be declined."
+                       data-pt="Qualquer pedido fora deste escopo será recusado.">Any request outside this scope will be declined.</p>
                 </section>
             </div>
             <div class="space-y-12">
                 <section class="info-block">
-                    <h4 class="header-font text-lg text-zinc-300 mb-4">Turnaround Time</h4>
-                    <p class="text-sm text-zinc-500 leading-relaxed">Each commission has an estimated completion time, which will be clearly communicated before payment.</p>
+                    <h4 class="header-font text-lg text-zinc-300 mb-4"
+                        data-en="Turnaround Time"
+                        data-pt="Prazo de Entrega">Turnaround Time</h4>
+                    <p class="text-sm text-zinc-500 leading-relaxed"
+                       data-en="Each commission has an estimated completion time, which will be clearly communicated before payment."
+                       data-pt="Cada comissão tem um tempo estimado de conclusão, que será comunicado claramente antes do pagamento.">Each commission has an estimated completion time, which will be clearly communicated before payment.</p>
                 </section>
                 <section class="info-block" style="border-left-color: #7f1d1d;">
-                    <h4 class="header-font text-lg warning-text mb-4">Refund Policy</h4>
+                    <h4 class="header-font text-lg warning-text mb-4"
+                        data-en="Refund Policy"
+                        data-pt="Política de Reembolso">Refund Policy</h4>
                     <ul class="space-y-3 text-sm text-zinc-500">
-                        <li>• Refunds are accepted only if I, the artist, exceed the announced completion time.</li>
-                        <li>• Refund requests made before the deadline will not be accepted.</li>
+                        <li>• <span data-en="Refunds are accepted only if I, the artist, exceed the announced completion time." data-pt="Reembolsos são aceitos apenas se eu, o artista, exceder o prazo de conclusão anunciado.">Refunds are accepted only if I, the artist, exceed the announced completion time.</span></li>
+                        <li>• <span data-en="Refund requests made before the deadline will not be accepted." data-pt="Pedidos de reembolso feitos antes do prazo não serão aceitos.">Refund requests made before the deadline will not be accepted.</span></li>
                     </ul>
                 </section>
             </div>
@@ -260,6 +439,56 @@
     <footer class="mt-24 text-center pb-8">
         <p class="text-zinc-800 text-[10px] uppercase tracking-widest">© Dom Artwork | All Rights Reserved</p>
     </footer>
+
+    <script>
+        let currentLang = 'en';
+
+        function switchLang(lang) {
+            if (lang === currentLang) return;
+            currentLang = lang;
+
+            const overlay = document.getElementById('lang-transition');
+            const flagUS = document.getElementById('flag-us');
+            const flagBR = document.getElementById('flag-br');
+
+            // Fade translatable elements out
+            const translatables = document.querySelectorAll('[data-en][data-pt]');
+            translatables.forEach(el => el.classList.add('lang-fade'));
+
+            // Show overlay
+            overlay.classList.add('active');
+
+            setTimeout(() => {
+                // Update all text
+                translatables.forEach(el => {
+                    el.innerHTML = el.getAttribute('data-' + lang);
+                });
+
+                // Update lang label
+                document.getElementById('lang-label').textContent = lang === 'pt' ? 'língua' : 'language';
+
+                // Update html lang attribute
+                document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+                // Swap flags: show the flag of the OPPOSITE language (so clicking it switches back)
+                if (lang === 'pt') {
+                    flagUS.classList.remove('visible');
+                    flagUS.classList.add('hidden-flag');
+                    flagBR.classList.remove('hidden-flag');
+                    flagBR.classList.add('visible');
+                } else {
+                    flagBR.classList.remove('visible');
+                    flagBR.classList.add('hidden-flag');
+                    flagUS.classList.remove('hidden-flag');
+                    flagUS.classList.add('visible');
+                }
+
+                // Fade elements back in & remove overlay
+                translatables.forEach(el => el.classList.remove('lang-fade'));
+                overlay.classList.remove('active');
+            }, 220);
+        }
+    </script>
 
 </body>
 </html>
