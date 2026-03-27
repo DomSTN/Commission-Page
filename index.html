@@ -146,13 +146,11 @@
             padding: 10px 14px 12px 14px;
             display: flex;
             align-items: center;
-            /* fixed size so the widget doesn't shift */
             width: 70px;
             height: 64px;
             position: relative;
         }
 
-        /* Stack both flags on top of each other */
         .flag-btn {
             position: absolute;
             width: 42px;
@@ -189,7 +187,6 @@
             pointer-events: none;
         }
 
-        /* Transition overlay */
         #lang-transition {
             position: fixed;
             inset: 0;
@@ -204,7 +201,6 @@
             pointer-events: all;
         }
 
-        /* Text transition for translatable elements */
         [data-en][data-pt] {
             transition: opacity 0.18s ease;
         }
@@ -222,11 +218,9 @@
     <div id="lang-widget">
         <div id="lang-label">language</div>
         <div id="lang-flags">
-            <!-- US flag: visible when in English, click to go PT -->
             <button class="flag-btn visible" id="flag-us" title="Switch to Português" onclick="switchLang('pt')">
                 <img src="https://flagcdn.com/w80/us.png" alt="Switch to Português">
             </button>
-            <!-- BR flag: visible when in Portuguese, click to go EN -->
             <button class="flag-btn hidden-flag" id="flag-br" title="Switch to English" onclick="switchLang('en')">
                 <img src="https://flagcdn.com/w80/br.png" alt="Switch to English">
             </button>
@@ -437,6 +431,22 @@
             </div>
         </div>
 
+        <!-- Chargeback Policy -->
+        <div class="section-divider"></div>
+
+        <div class="max-w-4xl mx-auto mb-16">
+            <div class="glass-card p-8 rounded-xl border-l-2 border-rose-700">
+                <h4 class="header-font text-lg text-rose-400 mb-4"
+                    data-en="Payment Agreement &amp; Chargeback Policy"
+                    data-pt="Acordo de Pagamento &amp; Política de Chargeback">Payment Agreement &amp; Chargeback Policy</h4>
+                <p class="text-sm text-zinc-400 leading-relaxed"
+                   data-en="By sending payment via PayPal, the client acknowledges and agrees to the full terms and conditions outlined on this page. No refunds will be issued outside of the scope described above, and they will only be permitted in the event that I, the artist, exceed the agreed deadline. Any chargeback or payment dispute filed without prior communication will be considered a breach of this agreement."
+                   data-pt="Ao enviar o pagamento via Pix, o cliente reconhece e concorda com todos os termos e condições descritos nesta página. Nenhum reembolso será emitido fora do escopo descrito acima, sendo permitido apenas no caso de eu, o artista, exceder o prazo acordado. Qualquer disputa de pagamento aberta sem comunicação prévia será considerada uma violação deste acordo.">
+                    By sending payment via PayPal, the client acknowledges and agrees to the full terms and conditions outlined on this page. No refunds will be issued outside of the scope described above, and they will only be permitted in the event that I, the artist, exceed the agreed deadline. Any chargeback or payment dispute filed without prior communication will be considered a breach of this agreement.
+                </p>
+            </div>
+        </div>
+
     </main>
 
     <footer class="mt-24 text-center pb-8">
@@ -454,26 +464,19 @@
             const flagUS = document.getElementById('flag-us');
             const flagBR = document.getElementById('flag-br');
 
-            // Fade translatable elements out
             const translatables = document.querySelectorAll('[data-en][data-pt]');
             translatables.forEach(el => el.classList.add('lang-fade'));
 
-            // Show overlay
             overlay.classList.add('active');
 
             setTimeout(() => {
-                // Update all text
                 translatables.forEach(el => {
                     el.innerHTML = el.getAttribute('data-' + lang);
                 });
 
-                // Update lang label
                 document.getElementById('lang-label').textContent = lang === 'pt' ? 'língua' : 'language';
-
-                // Update html lang attribute
                 document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
 
-                // Swap flags: show the flag of the OPPOSITE language (so clicking it switches back)
                 if (lang === 'pt') {
                     flagUS.classList.remove('visible');
                     flagUS.classList.add('hidden-flag');
@@ -486,7 +489,6 @@
                     flagUS.classList.add('visible');
                 }
 
-                // Fade elements back in & remove overlay
                 translatables.forEach(el => el.classList.remove('lang-fade'));
                 overlay.classList.remove('active');
             }, 220);
