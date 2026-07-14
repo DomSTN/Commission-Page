@@ -39,12 +39,12 @@
             color: #71717a;
         }
         .category-card {
-            border-top: 4px solid #c5a059;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            border: none;
+            transition: none;
         }
         .category-card:hover {
-            border-color: #10b981;
-            transform: translateY(-4px);
+            border: none;
+            transform: none;
         }
 
         .art-container {
@@ -52,13 +52,15 @@
             width: 100%;
             height: 320px;
             background-color: #1a1a1a;
-            border-bottom: 1px solid #222;
+            border: none;
         }
         .art-preview {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            border: none;
+            outline: none;
         }
 
         .art-label {
@@ -110,7 +112,7 @@
         .social-btn:hover { opacity: 0.8; }
         .x-symbol { font-size: 1.1rem; font-family: serif; }
 
-        /* ── Language Switcher ── */
+        /*  Language Switcher  */
         #lang-widget {
             position: fixed;
             top: 0;
@@ -291,7 +293,7 @@
                 </div>
             </div>
 
-            <div class="glass-card rounded-2xl category-card" style="border-top-color: #d4af37;">
+            <div class="glass-card rounded-2xl category-card">
                 <div class="art-container">
                     <span class="art-label"
                           data-en="Lineart &amp; Color Example"
@@ -325,7 +327,7 @@
                 </div>
             </div>
 
-            <div class="glass-card rounded-2xl category-card" style="border-top-color: #f1d592;">
+            <div class="glass-card rounded-2xl category-card">
                 <div class="art-container">
                     <span class="art-label"
                           data-en="Full Shade Example"
@@ -364,6 +366,14 @@
             <p class="text-sm text-zinc-400 uppercase tracking-[0.2em] font-semibold">
                 <span data-en="Prices shown as:" data-pt="Preços exibidos como:">Prices shown as:</span>
                 <span class="price-text">$ USD</span> <span class="price-divider">/</span> <span class="price-brl">R$ BRL</span>
+            </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto mb-8 px-2 text-center">
+            <p class="text-sm text-zinc-400 font-semibold"
+               data-en="Each additional character costs 50% of the selected base price."
+               data-pt="Cada personagem adicional custa 50% do preço-base selecionado.">
+                Each additional character costs 50% of the selected base price.
             </p>
         </div>
 
@@ -408,12 +418,12 @@
                             <span data-en="Fat OCs are welcome, as long as the belly isn't excessively large." data-pt="OCs gordos são bem-vindos, desde que a barriga não seja exageradamente grande.">Fat OCs are welcome, as long as the belly isn't excessively large.</span>
                         </li>
                         <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span>
-                            <span data-en="Fully furry characters only — human faces are not accepted, even if the character has fur, ears, a tail, or other animal features." data-pt="Apenas personagens totalmente furry — rostos humanos não são aceitos, mesmo que o personagem tenha pelo, orelhas, rabo ou outros traços animais.">Fully furry characters only — human faces are not accepted, even if the character has fur, ears, a tail, or other animal features.</span>
+                            <span data-en="Fully furry characters only. Human faces are not accepted, even if the character has fur, ears, a tail, or other animal features." data-pt="Apenas personagens totalmente furry. Rostos humanos não são aceitos, mesmo que o personagem tenha pelo, orelhas, rabo ou outros traços animais.">Fully furry characters only. Human faces are not accepted, even if the character has fur, ears, a tail, or other animal features.</span>
                         </li>
                     </ul>
                     <p class="mt-6 text-sm warning-text italic"
                        data-en="Any request outside this scope will be declined."
-      
+                       data-pt="Qualquer pedido fora deste escopo será recusado.">Any request outside this scope will be declined.</p>
                 </section>
             </div>
             <div class="space-y-12">
@@ -515,4 +525,4 @@
     </script>
 
 </body>
-</html
+</html>
