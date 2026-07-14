@@ -64,16 +64,15 @@
         }
 
         .art-label {
-            position: absolute;
-            top: 15px;
-            left: 15px;
+            display: inline-block;
+            align-self: flex-start;
+            margin: 14px 14px 10px;
             background: #000000;
             padding: 6px 14px;
             border-radius: 6px;
             font-size: 0.8rem;
             font-weight: 600;
             color: #ffffff;
-            z-index: 10;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
 
@@ -260,10 +259,10 @@
 
         <div class="grid md:grid-cols-3 gap-8 mb-8">
             <div class="glass-card rounded-2xl category-card">
+                <span class="art-label"
+                      data-en="Sketch Example"
+                      data-pt="Exemplo de Sketch">Sketch Example</span>
                 <div class="art-container">
-                    <span class="art-label"
-                          data-en="Sketch Example"
-                          data-pt="Exemplo de Sketch">Sketch Example</span>
                     <img src="images/sketch.png" alt="Sketch" class="art-preview">
                 </div>
                 <div class="p-8 text-center md:text-left">
@@ -294,10 +293,10 @@
             </div>
 
             <div class="glass-card rounded-2xl category-card">
+                <span class="art-label"
+                      data-en="Lineart &amp; Color Example"
+                      data-pt="Exemplo de Lineart &amp; Cor">Lineart &amp; Color Example</span>
                 <div class="art-container">
-                    <span class="art-label"
-                          data-en="Lineart &amp; Color Example"
-                          data-pt="Lineart &amp; Color Example">Lineart &amp; Color Example</span>
                     <img src="images/color.png" alt="Lineart & Color" class="art-preview">
                 </div>
                 <div class="p-8 text-center md:text-left">
@@ -328,10 +327,10 @@
             </div>
 
             <div class="glass-card rounded-2xl category-card">
+                <span class="art-label"
+                      data-en="Full Shade Example"
+                      data-pt="Exemplo de Full Shade">Full Shade Example</span>
                 <div class="art-container">
-                    <span class="art-label"
-                          data-en="Full Shade Example"
-                          data-pt="Exemplo de Full Shade">Full Shade Example</span>
                     <img src="images/shade.png" alt="Full Shade" class="art-preview">
                 </div>
                 <div class="p-8 text-center md:text-left">
