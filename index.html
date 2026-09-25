@@ -204,6 +204,50 @@
         [data-en][data-pt].lang-fade {
             opacity: 0;
         }
+
+        .vgen-banner {
+            background: linear-gradient(135deg, #062e22 0%, #0b3d2e 55%, #0a2b22 100%);
+            border: 1px solid #10b981;
+            box-shadow: 0 18px 50px rgba(16,185,129,0.10);
+        }
+        .vgen-logo {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 8px 24px rgba(16,185,129,0.22);
+        }
+        .vgen-logo span {
+            color: #062e22;
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: -0.04em;
+        }
+        .vgen-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #10b981;
+            color: #041c15;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: transform .2s ease, opacity .2s ease;
+        }
+        .vgen-btn:hover {
+            transform: translateY(-1px);
+            opacity: .9;
+        }
+        .archive-note {
+            border-left: 2px solid #10b981;
+            background: #0d1513;
+        }
     </style>
 </head>
 <body class="min-h-screen py-16 px-6">
@@ -253,138 +297,76 @@
 
     <main class="container mx-auto max-w-6xl">
 
+        <section class="vgen-banner rounded-2xl p-7 md:p-9 mb-12">
+            <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+                <div class="vgen-logo" aria-hidden="true"><span>VGen</span></div>
+                <div class="flex-1">
+                    <p class="text-emerald-300 text-xs uppercase tracking-[0.2em] font-bold mb-2"
+                       data-en="Important — Commission Requests"
+                       data-pt="Importante — Pedidos de Comissão">Important — Commission Requests</p>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-3"
+                        data-en="This website is no longer used to request commissions"
+                        data-pt="Este site não é mais usado para solicitar comissões">This website is no longer used to request commissions</h2>
+                    <p class="text-sm md:text-base text-emerald-50/75 leading-relaxed max-w-3xl"
+                       data-en="All commission requests, current services, prices, availability, and commission terms are handled through my VGen profile. Please use VGen to request a commission."
+                       data-pt="Todos os pedidos de comissão, serviços atuais, preços, disponibilidade e termos de comissão são tratados pelo meu perfil no VGen. Use o VGen para solicitar uma comissão.">All commission requests, current services, prices, availability, and commission terms are handled through my VGen profile. Please use VGen to request a commission.</p>
+                    <a href="https://vgen.co/PND0m" target="_blank" rel="noopener noreferrer" class="vgen-btn mt-5">
+                        <span data-en="Go to my VGen profile" data-pt="Ir para meu perfil no VGen">Go to my VGen profile</span>
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="archive-note rounded-xl p-5 mb-12">
+            <p class="text-sm text-zinc-400 leading-relaxed"
+               data-en="This page is now primarily a portfolio and archive. Information shown here may become outdated when I change my VGen services, prices, availability, or terms. Please always refer to my VGen profile for the current information."
+               data-pt="Esta página agora funciona principalmente como portfólio e arquivo. As informações exibidas aqui podem ficar desatualizadas quando eu alterar meus serviços, preços, disponibilidade ou termos no VGen. Consulte sempre meu perfil no VGen para obter as informações atuais.">This page is now primarily a portfolio and archive. Information shown here may become outdated when I change my VGen services, prices, availability, or terms. Please always refer to my VGen profile for the current information.</p>
+        </div>
+
         <div class="grid md:grid-cols-3 gap-8 mb-8">
             <div class="glass-card rounded-2xl category-card">
-                <span class="art-label"
-                      data-en="Sketch Example"
-                      data-pt="Exemplo de Sketch">Sketch Example</span>
-                <div class="art-container">
-                    <img src="images/sketch.png" alt="Sketch" class="art-preview">
-                </div>
+                <span class="art-label" data-en="Sketch Example" data-pt="Exemplo de Sketch">Sketch Example</span>
+                <div class="art-container"><img src="images/sketch.png" alt="Sketch" class="art-preview"></div>
                 <div class="p-8 text-center md:text-left">
-                    <h3 class="header-font text-2xl mb-8 border-b border-zinc-800 pb-4"
-                        data-en="Sketch"
-                        data-pt="Sketch">Sketch</h3>
-                    <ul class="space-y-8">
-                        <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
-                                  data-en="Headshot"
-                                  data-pt="Busto">Headshot</span>
-                            <div class="text-2xl font-semibold"><span class="price-text font-bold">$10</span><span class="price-divider">/</span><span class="price-brl text-lg font-bold">R$22</span></div>
-                        </li>
-                        <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
-                                  data-en="Half Body"
-                                  data-pt="Meio Corpo">Half Body</span>
-                            <div class="text-2xl font-semibold"><span class="price-text font-bold">$20</span><span class="price-divider">/</span><span class="price-brl text-lg font-bold">R$44</span></div>
-                        </li>
-                        <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
-                                  data-en="Full Body"
-                                  data-pt="Corpo Inteiro">Full Body</span>
-                            <div class="text-2xl font-semibold"><span class="price-text font-bold">$40</span><span class="price-divider">/</span><span class="price-brl text-lg font-bold">R$88</span></div>
-                        </li>
-                    </ul>
+                    <h3 class="header-font text-2xl mb-4 border-b border-zinc-800 pb-4" data-en="Sketch" data-pt="Sketch">Sketch</h3>
+                    <p class="text-sm text-zinc-500" data-en="Portfolio example — current commission pricing is available on VGen." data-pt="Exemplo de portfólio — os preços atuais de comissão estão disponíveis no VGen.">Portfolio example — current commission pricing is available on VGen.</p>
                 </div>
             </div>
 
             <div class="glass-card rounded-2xl category-card">
-                <span class="art-label"
-                      data-en="Lineart &amp; Color Example"
-                      data-pt="Exemplo de Lineart &amp; Cor">Lineart &amp; Color Example</span>
-                <div class="art-container">
-                    <img src="images/color.png" alt="Lineart & Color" class="art-preview">
-                </div>
+                <span class="art-label" data-en="Lineart &amp; Color Example" data-pt="Exemplo de Lineart &amp; Cor">Lineart &amp; Color Example</span>
+                <div class="art-container"><img src="images/color.png" alt="Lineart & Color" class="art-preview"></div>
                 <div class="p-8 text-center md:text-left">
-                    <h3 class="header-font text-2xl mb-8 border-b border-zinc-800 pb-4 text-zinc-100"
-                        data-en="Lineart &amp; Color"
-                        data-pt="Lineart &amp; Color">Lineart &amp; Color</h3>
-                    <ul class="space-y-8">
-                        <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
-                                  data-en="Headshot"
-                                  data-pt="Busto">Headshot</span>
-                            <div class="text-2xl font-semibold"><span class="price-text font-bold">$20</span><span class="price-divider">/</span><span class="price-brl text-lg font-bold">R$44</span></div>
-                        </li>
-                        <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
-                                  data-en="Half Body"
-                                  data-pt="Meio Corpo">Half Body</span>
-                            <div class="text-2xl font-semibold"><span class="price-text font-bold">$45</span><span class="price-divider">/</span><span class="price-brl text-lg font-bold">R$99</span></div>
-                        </li>
-                        <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
-                                  data-en="Full Body"
-                                  data-pt="Corpo Inteiro">Full Body</span>
-                            <div class="text-2xl font-semibold"><span class="price-text font-bold">$60</span><span class="price-divider">/</span><span class="price-brl text-lg font-bold">R$132</span></div>
-                        </li>
-                    </ul>
+                    <h3 class="header-font text-2xl mb-4 border-b border-zinc-800 pb-4 text-zinc-100" data-en="Lineart &amp; Color" data-pt="Lineart &amp; Color">Lineart &amp; Color</h3>
+                    <p class="text-sm text-zinc-500" data-en="Portfolio example — current commission pricing is available on VGen." data-pt="Exemplo de portfólio — os preços atuais de comissão estão disponíveis no VGen.">Portfolio example — current commission pricing is available on VGen.</p>
                 </div>
             </div>
 
             <div class="glass-card rounded-2xl category-card">
-                <span class="art-label"
-                      data-en="Full Shade Example"
-                      data-pt="Exemplo de Full Shade">Full Shade Example</span>
-                <div class="art-container">
-                    <img src="images/shade.png" alt="Full Shade" class="art-preview">
-                </div>
+                <span class="art-label" data-en="Full Shade Example" data-pt="Exemplo de Full Shade">Full Shade Example</span>
+                <div class="art-container"><img src="images/shade.png" alt="Full Shade" class="art-preview"></div>
                 <div class="p-8 text-center md:text-left">
-                    <h3 class="header-font text-2xl mb-8 border-b border-zinc-800 pb-4 text-zinc-100"
-                        data-en="Full Shade"
-                        data-pt="Full Shade">Full Shade</h3>
-                    <ul class="space-y-8">
-                        <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
-                                  data-en="Headshot"
-                                  data-pt="Busto">Headshot</span>
-                            <div class="text-2xl font-semibold"><span class="price-text font-bold">$50</span><span class="price-divider">/</span><span class="price-brl text-lg font-bold">R$110</span></div>
-                        </li>
-                        <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
-                                  data-en="Half Body"
-                                  data-pt="Meio Corpo">Half Body</span>
-                            <div class="text-2xl font-semibold"><span class="price-text font-bold">$70</span><span class="price-divider">/</span><span class="price-brl text-lg font-bold">R$154</span></div>
-                        </li>
-                        <li class="flex flex-col">
-                            <span class="text-[10px] text-zinc-500 uppercase tracking-widest mb-1"
-                                  data-en="Full Body"
-                                  data-pt="Corpo Inteiro">Full Body</span>
-                            <div class="text-2xl font-semibold"><span class="price-text font-bold">$100</span><span class="price-divider">/</span><span class="price-brl text-lg font-bold">R$220</span></div>
-                        </li>
-                    </ul>
+                    <h3 class="header-font text-2xl mb-4 border-b border-zinc-800 pb-4 text-zinc-100" data-en="Full Shade" data-pt="Full Shade">Full Shade</h3>
+                    <p class="text-sm text-zinc-500" data-en="Portfolio example — current commission pricing is available on VGen." data-pt="Exemplo de portfólio — os preços atuais de comissão estão disponíveis no VGen.">Portfolio example — current commission pricing is available on VGen.</p>
                 </div>
             </div>
-        </div>
-
-        <div class="max-w-4xl mx-auto mb-6 px-2 text-center">
-            <p class="text-sm text-zinc-400 uppercase tracking-[0.2em] font-semibold">
-                <span data-en="Prices shown as:" data-pt="Preços exibidos como:">Prices shown as:</span>
-                <span class="price-text">$ USD</span> <span class="price-divider">/</span> <span class="price-brl">R$ BRL</span>
-            </p>
-        </div>
-
-        <div class="max-w-4xl mx-auto mb-8 px-2 text-center">
-            <p class="text-sm text-zinc-400 font-semibold"
-               data-en="Each additional character costs 50% of the selected base price."
-               data-pt="Cada personagem adicional custa 50% do preço-base selecionado.">
-                Each additional character costs 50% of the selected base price.
-            </p>
         </div>
 
         <div class="max-w-4xl mx-auto mb-12">
-            <div class="glass-card p-6 rounded-xl border-l-2 border-emerald-500">
-                <h4 class="header-font text-lg text-emerald-400 mb-2"
-                    data-en="Pricing and Currency"
-                    data-pt="Preços e Moeda">Pricing and Currency</h4>
-                <p class="text-sm text-zinc-500 leading-relaxed"
-                   data-en="All transactions in USD are handled securely via PayPal. Prices listed in Brazilian Real will be adjusted to match the USD value, ensuring equivalent pricing based on the current exchange rate."
-                   data-pt="Todas as transações em USD são feitas com segurança via PayPal. Os preços em Real Brasileiro serão ajustados para corresponder ao valor em USD, garantindo preços equivalentes com base na taxa de câmbio atual.">
-                    All transactions in USD are handled securely via PayPal. Prices listed in Brazilian Real will be adjusted to match the USD value, ensuring equivalent pricing based on the current exchange rate.
-                </p>
+            <div class="glass-card p-7 rounded-xl border-l-2 border-emerald-500">
+                <h4 class="header-font text-lg text-emerald-400 mb-3" data-en="Current VGen Service" data-pt="Serviço Atual no VGen">Current VGen Service</h4>
+                <ul class="space-y-2 text-sm text-zinc-400">
+                    <li>• <span data-en="High-quality PNG" data-pt="PNG de alta qualidade">High-quality PNG</span></li>
+                    <li>• <span data-en="300 DPI illustration" data-pt="Ilustração em 300 DPI">300 DPI illustration</span></li>
+                    <li>• <span data-en="Rendered furry bara original character" data-pt="Personagem furry bara original renderizado">Rendered furry bara original character</span></li>
+                    <li>• <span data-en="Half Body: +$70 USD" data-pt="Meio Corpo: +$70 USD">Half Body: +$70 USD</span></li>
+                    <li>• <span data-en="Custom background: +$10 USD" data-pt="Fundo personalizado: +$10 USD">Custom background: +$10 USD</span></li>
+                    <li>• <span data-en="Additional character: +$20 USD" data-pt="Personagem adicional: +$20 USD">Additional character: +$20 USD</span></li>
+                </ul>
+                <p class="mt-4 text-xs text-zinc-600" data-en="These details are provided for reference only. The VGen service page is the source of truth for current pricing and availability." data-pt="Estas informações são apenas para referência. A página do serviço no VGen é a fonte oficial para preços e disponibilidade atuais.">These details are provided for reference only. The VGen service page is the source of truth for current pricing and availability.</p>
             </div>
         </div>
-
         <div class="section-divider"></div>
 
         <div class="grid md:grid-cols-2 gap-16 mb-16">
@@ -410,14 +392,7 @@
                             </span>
                         </li>
                         <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span>
-                            <span data-en="A 50% deposit is required to begin the commission. The remaining 50% must be paid upon completion of the commission. The final artwork will be provided without a watermark once full payment has been received. Sketch commissions require full payment upfront before work begins."
-                                  data-pt="Um pagamento inicial de 50% é necessário para iniciar a comissão. Os 50% restantes deverão ser pagos após a conclusão da comissão. A arte final será enviada sem marca d'água após o recebimento do pagamento integral. Comissões de Sketch exigem o pagamento integral antecipado antes do início do trabalho.">A 50% deposit is required to begin the commission. The remaining 50% must be paid upon completion of the commission. The final artwork will be provided without a watermark once full payment has been received. Sketch commissions require full payment upfront before work begins.</span>
-                        </li>
-                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span>
-                            <span data-en="Payments accepted via PayPal only for non-Brazilian clients." data-pt="Pagamentos aceitos apenas via PayPal caso o cliente não for brasileiro.">Payments accepted via PayPal only for non-Brazilian clients.</span>
-                        </li>
-                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span>
-                            <span data-en="For Brazilian clients, I only accept Pix." data-pt="Para clientes brasileiros, aceito apenas Pix.">For Brazilian clients, I only accept Pix.</span>
+                            <span data-en="Payment must be made in full through VGen before work begins." data-pt="O pagamento deve ser feito integralmente pelo VGen antes do início do trabalho.">Payment must be made in full through VGen before work begins.</span>
                         </li>
                         <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-amber-600 rounded-full"></span>
                             <span data-en="Fat OCs are welcome, as long as the belly isn't excessively large." data-pt="OCs gordos são bem-vindos, desde que a barriga não seja exageradamente grande.">Fat OCs are welcome, as long as the belly isn't excessively large.</span>
@@ -437,8 +412,8 @@
                         data-en="Turnaround Time"
                         data-pt="Prazo de Entrega">Turnaround Time</h4>
                     <p class="text-sm text-zinc-500 leading-relaxed"
-                       data-en="Each commission has an estimated completion time, which will be clearly communicated before payment."
-                       data-pt="Cada comissão tem um tempo estimado de conclusão, que será comunicado claramente antes do pagamento.">Each commission has an estimated completion time, which will be clearly communicated before payment.</p>
+                       data-en="Each commission has an estimated completion time, which will be clearly communicated through VGen before payment."
+                       data-pt="Cada comissão tem um tempo estimado de conclusão, que será comunicado claramente pelo VGen antes do pagamento.">Each commission has an estimated completion time, which will be clearly communicated through VGen before payment.</p>
                 </section>
                 <section class="info-block" style="border-left-color: #a16207;">
                     <h4 class="header-font text-lg text-amber-500 mb-4"
@@ -463,21 +438,7 @@
             </div>
         </div>
 
-        <!-- Chargeback Policy -->
         <div class="section-divider"></div>
-
-        <div class="max-w-4xl mx-auto mb-16">
-            <div class="glass-card p-8 rounded-xl border-l-2 border-rose-700">
-                <h4 class="header-font text-lg text-rose-400 mb-4"
-                    data-en="Payment Agreement &amp; Chargeback Policy"
-                    data-pt="Acordo de Pagamento &amp; Política de Chargeback">Payment Agreement &amp; Chargeback Policy</h4>
-                <p class="text-sm text-zinc-400 leading-relaxed"
-                   data-en="By sending payment via PayPal, the client acknowledges and agrees to the full terms and conditions outlined on this page. No refunds will be issued outside of the scope described above, and they will only be permitted in the event that I, the artist, exceed the agreed deadline. Any chargeback or payment dispute filed without prior communication will be considered a breach of this agreement."
-                   data-pt="Ao enviar o pagamento via Pix, o cliente reconhece e concorda com todos os termos e condições descritos nesta página. Nenhum reembolso será emitido fora do escopo descrito acima, sendo permitido apenas no caso de eu, o artista, exceder o prazo acordado. Qualquer disputa de pagamento aberta sem comunicação prévia será considerada uma violação deste acordo.">
-                    By sending payment via PayPal, the client acknowledges and agrees to the full terms and conditions outlined on this page. No refunds will be issued outside of the scope described above, and they will only be permitted in the event that I, the artist, exceed the agreed deadline. Any chargeback or payment dispute filed without prior communication will be considered a breach of this agreement.
-                </p>
-            </div>
-        </div>
 
     </main>
 
@@ -487,16 +448,11 @@
            data-pt="Por favor, mantenha uma comunicação respeitosa e profissional com o artista durante todo o processo da comissão. Comportamentos rudes, hostis ou antiéticos não serão tolerados. Caso eu decida que não me sinto mais confortável em continuar trabalhando com um cliente, reservo-me o direito de cancelar a comissão e emitir um reembolso.">
             Please communicate with the artist respectfully and professionally throughout the commission process. Rude, hostile, or unethical behavior will not be tolerated. If I decide that I am no longer comfortable continuing to work with a client, I reserve the right to cancel the commission and issue a refund.
         </p>
-        <div style="background: linear-gradient(135deg, #1e2f5e 0%, #1a2747 100%); border: 1px solid #3b4f8a; border-radius: 16px; padding: 28px 36px; display: flex; align-items: center; gap: 20px;">
-            <div style="background: #5865F2; border-radius: 50%; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <i class="fab fa-discord" style="font-size: 1.5rem; color: white;"></i>
-            </div>
-            <div>
-                <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.18em; color: #6d83c8; font-weight: 600; margin-bottom: 4px;"
-                   data-en="Reach me on Discord" data-pt="Me encontre no Discord">Reach me on Discord</p>
-                <p style="font-size: 1.15rem; font-weight: 700; color: #c9d3ff; letter-spacing: 0.03em;">@dom.venus</p>
-            </div>
-        </div>
+    </div>
+
+    <div class="text-center mb-10">
+        <a href="https://vgen.co/PND0m" target="_blank" rel="noopener noreferrer" class="vgen-btn"
+           data-en="Commission me on VGen ↗" data-pt="Peça sua comissão pelo VGen ↗">Commission me on VGen ↗</a>
     </div>
 
     <footer class="mt-24 text-center pb-8">
